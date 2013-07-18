@@ -7,12 +7,31 @@
 //
 
 #import "MWePOSPrint.h"
-#import "AFHTTPRequestOperation.h"
+
+static NSString * const kDevidDefault = @"local_printer";
 
 @implementation MWePOSPrint
 
-+ (void)sendData:(NSData*)data toURL:(NSURL*)url {
-  NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+- (id)initWithPrinterURL:(NSURL*)printerURL {
+  return [self initWithPrinterURL:printerURL devid:kDevidDefault timeout:10000];
+}
+
+- (id)initWithPrinterURL:(NSURL*)printerURL
+ devid:(NSString*)devid
+ timeout:(NSTimeInterval)timeout {
+  if (self = [super init]) {
+    _devid = nil != devid ? devid : kDevidDefault;
+    _timeout = timeout;
+    _printerURL = [NSURL
+      URLWithString:[NSString stringWithFormat:@"?devid=%@&timeout=%f", self.devid, self.timeout]
+      relativeToURL:printerURL];
+  }
+  return self;
+}
+
+- (void)sendData:(NSData*)data
+ completion:(void(^)(NSData *data, NSError *error))completion {
+  NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:self.printerURL];
   urlRequest.HTTPMethod = @"POST";
   urlRequest.HTTPBody = data;
   
@@ -20,7 +39,9 @@
     sendAsynchronousRequest:urlRequest
     queue:[NSOperationQueue mainQueue]
     completionHandler:^(NSURLResponse *urlResponse, NSData *data, NSError* error) {
-      
+      if (completion) {
+        completion(data, error);
+      }
   }];
 }
 

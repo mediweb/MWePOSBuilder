@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GDataXMLNode.h"
 
 @interface MWePOSBuilder : NSObject
 
@@ -26,6 +25,7 @@
 - (void)addLogoWithKey1:(NSInteger)key1 key2:(NSInteger)key2;
 - (void)addBarcodeWithData:(NSString *)data type:(NSString*)type hri:(NSString*)hri font:(NSString*)font width:(NSInteger)width height:(NSInteger)height;
 - (void)addSymbolWithData:(NSString*)data type:(NSString*)type level:(NSString*)level width:(NSInteger)width height:(NSInteger)height size:(NSInteger)size;
+- (void)addImage:(UIImage *)context x:(NSInteger)x y:(NSInteger)y width:(NSInteger)width height:(NSInteger)height color:(NSString*)color;
 
 //TODO: Add addCommand
 
@@ -39,6 +39,6 @@
 - (void)addPulseWithDrawer:(NSString *)drawer time:(NSString *)time;
 - (void)addSoundWithPattern:(NSString *)pattern repeat:(NSInteger)repeat;
 
-- (NSData *)XMLData;
+- (NSData *)printerData;
 
 @end

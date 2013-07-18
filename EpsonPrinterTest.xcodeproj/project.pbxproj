@@ -22,6 +22,8 @@
 		F440694117951300004C6C8C /* MWViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F440693F17951300004C6C8C /* MWViewController_iPad.xib */; };
 		F440695B1795254F004C6C8C /* MWePOSBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = F440695A1795254F004C6C8C /* MWePOSBuilder.m */; };
 		F45FDBD617961FA50003BB9F /* MWePOSPrint.m in Sources */ = {isa = PBXBuildFile; fileRef = F45FDBD517961FA50003BB9F /* MWePOSPrint.m */; };
+		F4BDF5D31797928900296F66 /* Mona-Lisa-Duckface-1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F4BDF5D21797928900296F66 /* Mona-Lisa-Duckface-1.jpg */; };
+		F4BDF5D51797C5A800296F66 /* logo1.bmp in Resources */ = {isa = PBXBuildFile; fileRef = F4BDF5D41797C5A800296F66 /* logo1.bmp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +51,8 @@
 		F440695A1795254F004C6C8C /* MWePOSBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWePOSBuilder.m; sourceTree = "<group>"; };
 		F45FDBD417961FA50003BB9F /* MWePOSPrint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWePOSPrint.h; sourceTree = "<group>"; };
 		F45FDBD517961FA50003BB9F /* MWePOSPrint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWePOSPrint.m; sourceTree = "<group>"; };
+		F4BDF5D21797928900296F66 /* Mona-Lisa-Duckface-1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Mona-Lisa-Duckface-1.jpg"; sourceTree = SOURCE_ROOT; };
+		F4BDF5D41797C5A800296F66 /* logo1.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = logo1.bmp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +121,8 @@
 		F440692817951300004C6C8C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F4BDF5D41797C5A800296F66 /* logo1.bmp */,
+				F4BDF5D21797928900296F66 /* Mona-Lisa-Duckface-1.jpg */,
 				F440692917951300004C6C8C /* EpsonPrinterTest-Info.plist */,
 				F440692A17951300004C6C8C /* InfoPlist.strings */,
 				F440692D17951300004C6C8C /* main.m */,
@@ -188,6 +194,8 @@
 				F440693817951300004C6C8C /* Default-568h@2x.png in Resources */,
 				F440693E17951300004C6C8C /* MWViewController_iPhone.xib in Resources */,
 				F440694117951300004C6C8C /* MWViewController_iPad.xib in Resources */,
+				F4BDF5D31797928900296F66 /* Mona-Lisa-Duckface-1.jpg in Resources */,
+				F4BDF5D51797C5A800296F66 /* logo1.bmp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

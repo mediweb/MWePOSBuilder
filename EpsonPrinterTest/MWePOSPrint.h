@@ -10,6 +10,12 @@
 
 @interface MWePOSPrint : NSObject
 
-+ (void)sendData:(NSData*)data toURL:(NSURL*)url;
+@property (readonly, strong, nonatomic) NSURL *printerURL;
+@property (readonly, strong, nonatomic) NSString *devid;
+@property (readonly, nonatomic) NSTimeInterval timeout;
+
+- (id)initWithPrinterURL:(NSURL*)printerURL;
+- (id)initWithPrinterURL:(NSURL*)printerURL devid:(NSString*)devid timeout:(NSTimeInterval)timeout;
+- (void)sendData:(NSData*)data completion:(void(^)(NSData *data, NSError *error))completion;
 
 @end

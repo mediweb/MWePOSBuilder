@@ -1,5 +1,5 @@
 PODS:
-  - AFNetworking (1.3.1)
+  - Base64 (1.0.1)
   - GData/XMLNode (1.9.1):
     - gtm-oauth2
     - GTMHTTPFetcher
@@ -23,11 +23,11 @@ PODS:
   - SBJson (3.2)
 
 DEPENDENCIES:
-  - AFNetworking
+  - Base64
   - GData/XMLNode
 
 SPEC CHECKSUMS:
-  AFNetworking: 9ec8aafb9269236a7630bd8d9838ce2ba30fa2a0
+  Base64: eaac9f2088ba659c5db1db960576eb0f2969ebaf
   GData: 211721231a39df9ef7d9ef28242ada695245019e
   gtm-oauth2: c4824003b569bc9b96446661fb92dbc681335499
   GTMHTTPFetcher: 99f026c2d7afbcf2a051a64a3e81dcaedd060135

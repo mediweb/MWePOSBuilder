@@ -7,6 +7,8 @@
 //
 
 #import "MWePOSBuilder.h"
+#import "GDataXMLNode.h"
+#import "MF_Base64Additions.h"
 
 static NSString * const regexFont = @"(font_[abc]|special_[ab])$";
 static NSString * const regexAlign = @"(left|center|right)$";
@@ -28,6 +30,147 @@ static NSString * const regexPattern = @"(none|pattern_[a-e]|error|paper_end)$";
 
 @implementation MWePOSBuilder
 
+NSData * encodeRasterData(UIImage *context, NSInteger width, NSInteger height) {
+  long d8[][8] = {
+    {0, 32, 8, 40, 2, 34, 10, 42},
+    {48, 16, 56, 24, 50, 18, 58, 26},
+    {12, 44, 4, 36, 14, 46, 6, 38},
+    {60, 28, 52, 20, 62, 30, 54, 22},
+    {3, 35, 11, 43, 1, 33, 9, 41},
+    {51, 19, 59, 27, 49, 17, 57, 25},
+    {15, 47, 7, 39, 13, 45, 5, 37},
+    {63, 31, 55, 23, 61, 29, 53, 21}
+  };
+
+  NSMutableData *s = [[NSMutableData alloc] init];
+  
+  unsigned char * data = [MWePOSBuilder convertUIImageToBitmapRGBA8:context];
+  unichar n = 0;
+  int p = 0;
+  
+  for (int y = 0; y < height; y++) {
+    for (int x = 0; x < width; x++) {
+      unsigned char r = data[p++];
+      unsigned char g = data[p++];
+      unsigned char b = data[p++];
+      unsigned char a = data[p++];
+      
+      double v = 255.0 - a + ((r * 29891.0 + g * 58661.0 + b * 11448.0) * a + 12750000.0) / 25500000.0;
+      long d = (d8[y & 7][x & 7] << 2) + 2;
+
+      if (v < d) {
+        n |= 0x80 >> (x & 7);
+      }
+      
+      if ((x & 7) == 7 || x == width - 1) {
+        unichar bytes = n == 16 ? 32 : n;
+        [s appendBytes:&bytes length:1];
+        n = 0;
+      }
+    }
+  }
+  
+  return s;
+}
+
++ (unsigned char *) convertUIImageToBitmapRGBA8:(UIImage *) image {
+
+	CGImageRef imageRef = image.CGImage;
+
+	// Create a bitmap context to draw the uiimage into
+	CGContextRef context = [self newBitmapRGBA8ContextFromImage:imageRef];
+
+	if(!context) {
+		return NULL;
+	}
+
+	size_t width = CGImageGetWidth(imageRef);
+	size_t height = CGImageGetHeight(imageRef);
+
+	CGRect rect = CGRectMake(0, 0, width, height);
+
+	// Draw image into the context to get the raw image data
+	CGContextDrawImage(context, rect, imageRef);
+
+	// Get a pointer to the data	
+	unsigned char *bitmapData = (unsigned char *)CGBitmapContextGetData(context);
+
+	// Copy the data and release the memory (return memory allocated with new)
+	size_t bytesPerRow = CGBitmapContextGetBytesPerRow(context);
+	size_t bufferLength = bytesPerRow * height;
+
+	unsigned char *newBitmap = NULL;
+
+	if(bitmapData) {
+		newBitmap = (unsigned char *)malloc(sizeof(unsigned char) * bytesPerRow * height);
+
+		if(newBitmap) {	// Copy the data
+			for(int i = 0; i < bufferLength; ++i) {
+				newBitmap[i] = bitmapData[i];
+			}
+		}
+
+		free(bitmapData);
+
+	} else {
+		NSLog(@"Error getting bitmap pixel data\n");
+	}
+
+	CGContextRelease(context);
+
+	return newBitmap;	
+}
+
++ (CGContextRef) newBitmapRGBA8ContextFromImage:(CGImageRef) image {
+	CGContextRef context = NULL;
+	CGColorSpaceRef colorSpace;
+	uint32_t *bitmapData;
+
+	size_t bitsPerPixel = 32;
+	size_t bitsPerComponent = 8;
+	size_t bytesPerPixel = bitsPerPixel / bitsPerComponent;
+
+	size_t width = CGImageGetWidth(image);
+	size_t height = CGImageGetHeight(image);
+
+	size_t bytesPerRow = width * bytesPerPixel;
+	size_t bufferLength = bytesPerRow * height;
+
+	colorSpace = CGColorSpaceCreateDeviceRGB();
+
+	if(!colorSpace) {
+		NSLog(@"Error allocating color space RGB\n");
+		return NULL;
+	}
+
+	// Allocate memory for image data
+	bitmapData = (uint32_t *)malloc(bufferLength);
+
+	if(!bitmapData) {
+		NSLog(@"Error allocating memory for bitmap\n");
+		CGColorSpaceRelease(colorSpace);
+		return NULL;
+	}
+
+	//Create bitmap context
+	context = CGBitmapContextCreate(bitmapData, 
+									width, 
+									height, 
+									bitsPerComponent, 
+									bytesPerRow, 
+									colorSpace, 
+                                    kCGImageAlphaPremultipliedLast);	// RGBA
+
+	if(!context) {
+		free(bitmapData);
+		NSLog(@"Bitmap context not created");
+	}
+
+	CGColorSpaceRelease(colorSpace);
+
+	return context;	
+}
+
 static GDataXMLNode * getEnumAttr(NSString *name, NSString *value, NSString *pattern) {
   NSError *error = nil;
 
@@ -44,7 +187,7 @@ static GDataXMLNode * getBoolAttr(NSString *name, BOOL value) {
 }
 
 static GDataXMLNode * getIntAttr(NSString *name, NSInteger value, NSInteger min, NSInteger max) {
-  NSCAssert1(value > min && value < max, @"Parameter %d is invalid", value);
+  NSCAssert1(value >= min && value <= max, @"Parameter %d is invalid", value);
   return [GDataXMLNode attributeWithName:name stringValue:[@(value) stringValue]];
 }
 
@@ -229,7 +372,31 @@ static GDataXMLNode * getUShortAttr(NSString *name, NSInteger value) {
   [self.rootElement addChild:node];
 }
 
-//TODO: Add addCommand
+- (void)addImage:(UIImage *)context x:(NSInteger)x y:(NSInteger)y width:(NSInteger)width height:(NSInteger)height color:(NSString*)color {
+  GDataXMLElement *node = [GDataXMLElement elementWithName:@"image"];
+  
+  getUShortAttr(@"x", x);
+  getUShortAttr(@"y", y);
+  
+  [node addAttribute:getUShortAttr(@"width", width)];
+  [node addAttribute:getUShortAttr(@"height", height)];
+  
+  if (color) {
+    [node addAttribute:getEnumAttr(@"color", color, regexColor)];
+  }
+  
+//  CGRect rect = CGRectMake(x, y, width, height);
+//  CGImageRef imageRef = CGImageCreateWithImageInRect(context.CGImage, rect);
+//  UIImage *result = [UIImage imageWithCGImage:imageRef];
+  
+  NSData *rasterData = encodeRasterData(context, width, height);
+  
+//  NSLog(@"%@", [rasterData base64String]);
+  
+  [node setStringValue:[rasterData base64String]];
+
+  [self.rootElement addChild:node];
+}
 
 - (void)addHLineWithStartPosition:(NSInteger)x1 endPosition:(NSInteger)x2 style:(NSString*)style {
   GDataXMLElement *node = [GDataXMLElement elementWithName:@"hline"];
@@ -306,7 +473,7 @@ static GDataXMLNode * getUShortAttr(NSString *name, NSInteger value) {
   [self.rootElement addChild:node];
 }
 
-- (NSData *)XMLData {
+- (NSData *)printerData {
   GDataXMLElement *envelopeNode = [GDataXMLElement elementWithName:@"s:Envelope"];
   [envelopeNode addAttribute:[GDataXMLNode
     attributeWithName:@"xmlns:s"
