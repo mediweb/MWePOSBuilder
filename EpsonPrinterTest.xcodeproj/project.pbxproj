@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6BAB2B77770240D281FE07DB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10286818486A419D944C0B60 /* libPods.a */; };
 		F440692217951300004C6C8C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F440692117951300004C6C8C /* UIKit.framework */; };
 		F440692417951300004C6C8C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F440692317951300004C6C8C /* Foundation.framework */; };
 		F440692617951300004C6C8C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F440692517951300004C6C8C /* CoreGraphics.framework */; };
@@ -19,9 +20,13 @@
 		F440693B17951300004C6C8C /* MWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F440693A17951300004C6C8C /* MWViewController.m */; };
 		F440693E17951300004C6C8C /* MWViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F440693C17951300004C6C8C /* MWViewController_iPhone.xib */; };
 		F440694117951300004C6C8C /* MWViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F440693F17951300004C6C8C /* MWViewController_iPad.xib */; };
+		F440695B1795254F004C6C8C /* MWePOSBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = F440695A1795254F004C6C8C /* MWePOSBuilder.m */; };
+		F45FDBD617961FA50003BB9F /* MWePOSPrint.m in Sources */ = {isa = PBXBuildFile; fileRef = F45FDBD517961FA50003BB9F /* MWePOSPrint.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		10286818486A419D944C0B60 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9383681742A46FABC3BD7AD /* Pods/Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		F440691E17951300004C6C8C /* EpsonPrinterTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EpsonPrinterTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F440692117951300004C6C8C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F440692317951300004C6C8C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -39,6 +44,11 @@
 		F440693A17951300004C6C8C /* MWViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MWViewController.m; sourceTree = "<group>"; };
 		F440693D17951300004C6C8C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MWViewController_iPhone.xib; sourceTree = "<group>"; };
 		F440694017951300004C6C8C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MWViewController_iPad.xib; sourceTree = "<group>"; };
+		F44069491795142B004C6C8C /* ePOS-Print.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ePOS-Print.h"; sourceTree = SOURCE_ROOT; };
+		F44069591795254F004C6C8C /* MWePOSBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWePOSBuilder.h; sourceTree = "<group>"; };
+		F440695A1795254F004C6C8C /* MWePOSBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWePOSBuilder.m; sourceTree = "<group>"; };
+		F45FDBD417961FA50003BB9F /* MWePOSPrint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWePOSPrint.h; sourceTree = "<group>"; };
+		F45FDBD517961FA50003BB9F /* MWePOSPrint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWePOSPrint.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +59,7 @@
 				F440692217951300004C6C8C /* UIKit.framework in Frameworks */,
 				F440692417951300004C6C8C /* Foundation.framework in Frameworks */,
 				F440692617951300004C6C8C /* CoreGraphics.framework in Frameworks */,
+				6BAB2B77770240D281FE07DB /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +72,7 @@
 				F440692717951300004C6C8C /* EpsonPrinterTest */,
 				F440692017951300004C6C8C /* Frameworks */,
 				F440691F17951300004C6C8C /* Products */,
+				B9383681742A46FABC3BD7AD /* Pods/Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,6 +90,7 @@
 				F440692117951300004C6C8C /* UIKit.framework */,
 				F440692317951300004C6C8C /* Foundation.framework */,
 				F440692517951300004C6C8C /* CoreGraphics.framework */,
+				10286818486A419D944C0B60 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -85,6 +98,7 @@
 		F440692717951300004C6C8C /* EpsonPrinterTest */ = {
 			isa = PBXGroup;
 			children = (
+				F44069491795142B004C6C8C /* ePOS-Print.h */,
 				F440693017951300004C6C8C /* MWAppDelegate.h */,
 				F440693117951300004C6C8C /* MWAppDelegate.m */,
 				F440693917951300004C6C8C /* MWViewController.h */,
@@ -92,6 +106,10 @@
 				F440693C17951300004C6C8C /* MWViewController_iPhone.xib */,
 				F440693F17951300004C6C8C /* MWViewController_iPad.xib */,
 				F440692817951300004C6C8C /* Supporting Files */,
+				F44069591795254F004C6C8C /* MWePOSBuilder.h */,
+				F440695A1795254F004C6C8C /* MWePOSBuilder.m */,
+				F45FDBD417961FA50003BB9F /* MWePOSPrint.h */,
+				F45FDBD517961FA50003BB9F /* MWePOSPrint.m */,
 			);
 			path = EpsonPrinterTest;
 			sourceTree = "<group>";
@@ -117,9 +135,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F440694417951300004C6C8C /* Build configuration list for PBXNativeTarget "EpsonPrinterTest" */;
 			buildPhases = (
+				81FFFF3261B34D4ABF1BD991 /* Check Pods Manifest.lock */,
 				F440691A17951300004C6C8C /* Sources */,
 				F440691B17951300004C6C8C /* Frameworks */,
 				F440691C17951300004C6C8C /* Resources */,
+				82FA5EA5E6F3432CA7133FBC /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -173,6 +193,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		81FFFF3261B34D4ABF1BD991 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		82FA5EA5E6F3432CA7133FBC /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F440691A17951300004C6C8C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -181,6 +234,8 @@
 				F440692E17951300004C6C8C /* main.m in Sources */,
 				F440693217951300004C6C8C /* MWAppDelegate.m in Sources */,
 				F440693B17951300004C6C8C /* MWViewController.m in Sources */,
+				F440695B1795254F004C6C8C /* MWePOSBuilder.m in Sources */,
+				F45FDBD617961FA50003BB9F /* MWePOSPrint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,10 +329,16 @@
 		};
 		F440694517951300004C6C8C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9383681742A46FABC3BD7AD /* Pods/Pods.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EpsonPrinterTest/EpsonPrinterTest-Prefix.pch";
 				INFOPLIST_FILE = "EpsonPrinterTest/EpsonPrinterTest-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -285,10 +346,16 @@
 		};
 		F440694617951300004C6C8C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9383681742A46FABC3BD7AD /* Pods/Pods.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EpsonPrinterTest/EpsonPrinterTest-Prefix.pch";
 				INFOPLIST_FILE = "EpsonPrinterTest/EpsonPrinterTest-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -313,6 +380,7 @@
 				F440694617951300004C6C8C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
