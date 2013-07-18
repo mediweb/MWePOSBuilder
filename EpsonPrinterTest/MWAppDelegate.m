@@ -28,9 +28,7 @@
   MWePOSBuilder *builder = [[MWePOSBuilder alloc] init];
   [builder addImage:[UIImage imageNamed:@"logo1.bmp"] x:0 y:0 width:200 height:70 color:nil];
   [builder addCut:@"feed"];
-  
-  NSLog(@"%@", [[NSString alloc] initWithData:[builder printerData] encoding:NSUTF8StringEncoding]);
-  
+
   MWePOSPrint *printService = [[MWePOSPrint alloc] initWithPrinterURL:[NSURL URLWithString:@"http://192.168.1.16/cgi-bin/epos/service.cgi"]];
   [printService sendData:[builder printerData] completion:^(NSData *data, NSError *error){
     NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);

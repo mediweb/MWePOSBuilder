@@ -24,6 +24,7 @@
 		F45FDBD617961FA50003BB9F /* MWePOSPrint.m in Sources */ = {isa = PBXBuildFile; fileRef = F45FDBD517961FA50003BB9F /* MWePOSPrint.m */; };
 		F4BDF5D31797928900296F66 /* Mona-Lisa-Duckface-1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F4BDF5D21797928900296F66 /* Mona-Lisa-Duckface-1.jpg */; };
 		F4BDF5D51797C5A800296F66 /* logo1.bmp in Resources */ = {isa = PBXBuildFile; fileRef = F4BDF5D41797C5A800296F66 /* logo1.bmp */; };
+		F4BDF5D81797D21300296F66 /* UIImage+Conversion.m in Sources */ = {isa = PBXBuildFile; fileRef = F4BDF5D71797D21300296F66 /* UIImage+Conversion.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,8 @@
 		F45FDBD517961FA50003BB9F /* MWePOSPrint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWePOSPrint.m; sourceTree = "<group>"; };
 		F4BDF5D21797928900296F66 /* Mona-Lisa-Duckface-1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Mona-Lisa-Duckface-1.jpg"; sourceTree = SOURCE_ROOT; };
 		F4BDF5D41797C5A800296F66 /* logo1.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = logo1.bmp; sourceTree = SOURCE_ROOT; };
+		F4BDF5D61797D21200296F66 /* UIImage+Conversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Conversion.h"; sourceTree = "<group>"; };
+		F4BDF5D71797D21300296F66 /* UIImage+Conversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Conversion.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +117,8 @@
 				F440695A1795254F004C6C8C /* MWePOSBuilder.m */,
 				F45FDBD417961FA50003BB9F /* MWePOSPrint.h */,
 				F45FDBD517961FA50003BB9F /* MWePOSPrint.m */,
+				F4BDF5D61797D21200296F66 /* UIImage+Conversion.h */,
+				F4BDF5D71797D21300296F66 /* UIImage+Conversion.m */,
 			);
 			path = EpsonPrinterTest;
 			sourceTree = "<group>";
@@ -244,6 +249,7 @@
 				F440693B17951300004C6C8C /* MWViewController.m in Sources */,
 				F440695B1795254F004C6C8C /* MWePOSBuilder.m in Sources */,
 				F45FDBD617961FA50003BB9F /* MWePOSPrint.m in Sources */,
+				F4BDF5D81797D21300296F66 /* UIImage+Conversion.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

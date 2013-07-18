@@ -9,6 +9,7 @@
 #import "MWePOSBuilder.h"
 #import "GDataXMLNode.h"
 #import "MF_Base64Additions.h"
+#import "UIImage+Conversion.h"
 
 static NSString * const regexFont = @"(font_[abc]|special_[ab])$";
 static NSString * const regexAlign = @"(left|center|right)$";
@@ -44,7 +45,7 @@ NSData * encodeRasterData(UIImage *context, NSInteger width, NSInteger height) {
 
   NSMutableData *s = [[NSMutableData alloc] init];
   
-  unsigned char * data = [MWePOSBuilder convertUIImageToBitmapRGBA8:context];
+  unsigned char * data = [context bitmapRGBA8Representation];
   unichar n = 0;
   int p = 0;
   
@@ -71,104 +72,6 @@ NSData * encodeRasterData(UIImage *context, NSInteger width, NSInteger height) {
   }
   
   return s;
-}
-
-+ (unsigned char *) convertUIImageToBitmapRGBA8:(UIImage *) image {
-
-	CGImageRef imageRef = image.CGImage;
-
-	// Create a bitmap context to draw the uiimage into
-	CGContextRef context = [self newBitmapRGBA8ContextFromImage:imageRef];
-
-	if(!context) {
-		return NULL;
-	}
-
-	size_t width = CGImageGetWidth(imageRef);
-	size_t height = CGImageGetHeight(imageRef);
-
-	CGRect rect = CGRectMake(0, 0, width, height);
-
-	// Draw image into the context to get the raw image data
-	CGContextDrawImage(context, rect, imageRef);
-
-	// Get a pointer to the data	
-	unsigned char *bitmapData = (unsigned char *)CGBitmapContextGetData(context);
-
-	// Copy the data and release the memory (return memory allocated with new)
-	size_t bytesPerRow = CGBitmapContextGetBytesPerRow(context);
-	size_t bufferLength = bytesPerRow * height;
-
-	unsigned char *newBitmap = NULL;
-
-	if(bitmapData) {
-		newBitmap = (unsigned char *)malloc(sizeof(unsigned char) * bytesPerRow * height);
-
-		if(newBitmap) {	// Copy the data
-			for(int i = 0; i < bufferLength; ++i) {
-				newBitmap[i] = bitmapData[i];
-			}
-		}
-
-		free(bitmapData);
-
-	} else {
-		NSLog(@"Error getting bitmap pixel data\n");
-	}
-
-	CGContextRelease(context);
-
-	return newBitmap;	
-}
-
-+ (CGContextRef) newBitmapRGBA8ContextFromImage:(CGImageRef) image {
-	CGContextRef context = NULL;
-	CGColorSpaceRef colorSpace;
-	uint32_t *bitmapData;
-
-	size_t bitsPerPixel = 32;
-	size_t bitsPerComponent = 8;
-	size_t bytesPerPixel = bitsPerPixel / bitsPerComponent;
-
-	size_t width = CGImageGetWidth(image);
-	size_t height = CGImageGetHeight(image);
-
-	size_t bytesPerRow = width * bytesPerPixel;
-	size_t bufferLength = bytesPerRow * height;
-
-	colorSpace = CGColorSpaceCreateDeviceRGB();
-
-	if(!colorSpace) {
-		NSLog(@"Error allocating color space RGB\n");
-		return NULL;
-	}
-
-	// Allocate memory for image data
-	bitmapData = (uint32_t *)malloc(bufferLength);
-
-	if(!bitmapData) {
-		NSLog(@"Error allocating memory for bitmap\n");
-		CGColorSpaceRelease(colorSpace);
-		return NULL;
-	}
-
-	//Create bitmap context
-	context = CGBitmapContextCreate(bitmapData, 
-									width, 
-									height, 
-									bitsPerComponent, 
-									bytesPerRow, 
-									colorSpace, 
-                                    kCGImageAlphaPremultipliedLast);	// RGBA
-
-	if(!context) {
-		free(bitmapData);
-		NSLog(@"Bitmap context not created");
-	}
-
-	CGColorSpaceRelease(colorSpace);
-
-	return context;	
 }
 
 static GDataXMLNode * getEnumAttr(NSString *name, NSString *value, NSString *pattern) {
@@ -385,14 +288,12 @@ static GDataXMLNode * getUShortAttr(NSString *name, NSInteger value) {
     [node addAttribute:getEnumAttr(@"color", color, regexColor)];
   }
   
-//  CGRect rect = CGRectMake(x, y, width, height);
-//  CGImageRef imageRef = CGImageCreateWithImageInRect(context.CGImage, rect);
-//  UIImage *result = [UIImage imageWithCGImage:imageRef];
+  CGRect rect = CGRectMake(x, y, width, height);
+  CGImageRef imageRef = CGImageCreateWithImageInRect(context.CGImage, rect);
+  UIImage *result = [UIImage imageWithCGImage:imageRef];
   
-  NSData *rasterData = encodeRasterData(context, width, height);
-  
-//  NSLog(@"%@", [rasterData base64String]);
-  
+  NSData *rasterData = encodeRasterData(result, width, height);
+
   [node setStringValue:[rasterData base64String]];
 
   [self.rootElement addChild:node];
