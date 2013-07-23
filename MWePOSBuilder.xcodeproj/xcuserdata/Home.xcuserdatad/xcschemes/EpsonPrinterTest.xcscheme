@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F440691D17951300004C6C8C"
-               BuildableName = "EpsonPrinterTest.app"
-               BlueprintName = "EpsonPrinterTest"
-               ReferencedContainer = "container:EpsonPrinterTest.xcodeproj">
+               BuildableName = "MWePOSBuilder.app"
+               BlueprintName = "MWePOSBuilder"
+               ReferencedContainer = "container:MWePOSBuilder.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F440691D17951300004C6C8C"
-            BuildableName = "EpsonPrinterTest.app"
-            BlueprintName = "EpsonPrinterTest"
-            ReferencedContainer = "container:EpsonPrinterTest.xcodeproj">
+            BuildableName = "MWePOSBuilder.app"
+            BlueprintName = "MWePOSBuilder"
+            ReferencedContainer = "container:MWePOSBuilder.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -52,9 +52,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F440691D17951300004C6C8C"
-            BuildableName = "EpsonPrinterTest.app"
-            BlueprintName = "EpsonPrinterTest"
-            ReferencedContainer = "container:EpsonPrinterTest.xcodeproj">
+            BuildableName = "MWePOSBuilder.app"
+            BlueprintName = "MWePOSBuilder"
+            ReferencedContainer = "container:MWePOSBuilder.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -70,9 +70,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F440691D17951300004C6C8C"
-            BuildableName = "EpsonPrinterTest.app"
-            BlueprintName = "EpsonPrinterTest"
-            ReferencedContainer = "container:EpsonPrinterTest.xcodeproj">
+            BuildableName = "MWePOSBuilder.app"
+            BlueprintName = "MWePOSBuilder"
+            ReferencedContainer = "container:MWePOSBuilder.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

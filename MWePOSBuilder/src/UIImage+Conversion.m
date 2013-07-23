@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  *
- * Modified into a UIImage category by Matt Gillingham (2013)
+ * Modified into a UIImage category by MediWeb, Inc. (2013)
  */
 
 
@@ -32,10 +32,9 @@
 - (unsigned char *)bitmapRGBA8Representation {
 	CGImageRef imageRef = self.CGImage;
 
-	// Create a bitmap context to draw the uiimage into
 	CGContextRef context = [[self class] newBitmapRGBA8ContextFromImage:imageRef];
 
-	if(!context) {
+	if (!context) {
 		return NULL;
 	}
 
@@ -44,36 +43,31 @@
 
 	CGRect rect = CGRectMake(0, 0, width, height);
 
-	// Draw image into the context to get the raw image data
 	CGContextDrawImage(context, rect, imageRef);
 
-	// Get a pointer to the data
 	unsigned char *bitmapData = (unsigned char *)CGBitmapContextGetData(context);
 
-	// Copy the data and release the memory (return memory allocated with new)
 	size_t bytesPerRow = CGBitmapContextGetBytesPerRow(context);
 	size_t bufferLength = bytesPerRow * height;
 
 	unsigned char *newBitmap = NULL;
 
-	if(bitmapData) {
+	if (bitmapData) {
 		newBitmap = (unsigned char *)malloc(sizeof(unsigned char) * bytesPerRow * height);
 
-		if(newBitmap) {	// Copy the data
-			for(int i = 0; i < bufferLength; ++i) {
+		if (newBitmap) {
+			for (int i = 0; i < bufferLength; ++i) {
 				newBitmap[i] = bitmapData[i];
 			}
 		}
 
 		free(bitmapData);
 
-	} else {
-		NSLog(@"Error getting bitmap pixel data\n");
 	}
 
 	CGContextRelease(context);
 
-	return newBitmap;
+	return newBitmap;	
 }
 
 + (CGContextRef)newBitmapRGBA8ContextFromImage:(CGImageRef)image {
@@ -93,37 +87,34 @@
 
 	colorSpace = CGColorSpaceCreateDeviceRGB();
 
-	if(!colorSpace) {
-		NSLog(@"Error allocating color space RGB\n");
+	if (!colorSpace) {
 		return NULL;
 	}
 
-	// Allocate memory for image data
 	bitmapData = (uint32_t *)malloc(bufferLength);
 
-	if(!bitmapData) {
-		NSLog(@"Error allocating memory for bitmap\n");
+	if (!bitmapData) {
 		CGColorSpaceRelease(colorSpace);
 		return NULL;
 	}
 
-	//Create bitmap context
-	context = CGBitmapContextCreate(bitmapData,
-									width,
-									height,
-									bitsPerComponent,
-									bytesPerRow,
-									colorSpace,
-                                    kCGImageAlphaPremultipliedLast);	// RGBA
+	context = CGBitmapContextCreate(
+    bitmapData,
+    width,
+    height,
+    bitsPerComponent,
+    bytesPerRow,
+    colorSpace,
+    kCGImageAlphaPremultipliedLast
+  );
 
-	if(!context) {
+	if (!context) {
 		free(bitmapData);
-		NSLog(@"Bitmap context not created");
-	}
+  }
 
 	CGColorSpaceRelease(colorSpace);
 
-	return context;
+	return context;	
 }
 
 @end

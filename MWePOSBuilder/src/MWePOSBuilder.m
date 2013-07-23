@@ -1,10 +1,17 @@
-//
-//  MWePOSBuilder.m
-//  EpsonPrinterTest
-//
-//  Created by Matt on 7/16/13.
-//  Copyright (c) 2013 Matthew Gillingham. All rights reserved.
-//
+// Copyright (C) 2013 MediWeb, Inc.
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+// Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+// WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "MWePOSBuilder.h"
 #import "GDataXMLNode.h"
@@ -31,8 +38,8 @@ static NSString * const regexPattern = @"(none|pattern_[a-e]|error|paper_end)$";
 
 @implementation MWePOSBuilder
 
-NSData * encodeRasterData(UIImage *context, NSInteger width, NSInteger height) {
-  long d8[][8] = {
+NSData * encodeRasterData(UIImage *context, NSUInteger width, NSUInteger height) {
+  NSUInteger d8[][8] = {
     {0, 32, 8, 40, 2, 34, 10, 42},
     {48, 16, 56, 24, 50, 18, 58, 26},
     {12, 44, 4, 36, 14, 46, 6, 38},
@@ -47,10 +54,10 @@ NSData * encodeRasterData(UIImage *context, NSInteger width, NSInteger height) {
   
   unsigned char * data = [context bitmapRGBA8Representation];
   unichar n = 0;
-  int p = 0;
+  NSUInteger p = 0;
   
-  for (int y = 0; y < height; y++) {
-    for (int x = 0; x < width; x++) {
+  for (NSUInteger y = 0; y < height; y++) {
+    for (NSUInteger x = 0; x < width; x++) {
       unsigned char r = data[p++];
       unsigned char g = data[p++];
       unsigned char b = data[p++];
@@ -221,7 +228,12 @@ static GDataXMLNode * getUShortAttr(NSString *name, NSInteger value) {
   [self.rootElement addChild:node];
 }
 
-- (void)addBarcodeWithData:(NSString *)data type:(NSString*)type hri:(NSString*)hri font:(NSString*)font width:(NSInteger)width height:(NSInteger)height {
+- (void)addBarcodeWithData:(NSString *)data
+ type:(NSString*)type
+ hri:(NSString*)hri
+ font:(NSString*)font
+ width:(NSInteger)width
+ height:(NSInteger)height {
   GDataXMLElement *node = [GDataXMLElement elementWithName:@"barcode"];
 
   [node addAttribute:getEnumAttr(@"type", type, regexBarcode)];
@@ -293,7 +305,7 @@ static GDataXMLNode * getUShortAttr(NSString *name, NSInteger value) {
   UIImage *result = [UIImage imageWithCGImage:imageRef];
   
   NSData *rasterData = encodeRasterData(result, width, height);
-
+    
   [node setStringValue:[rasterData base64String]];
 
   [self.rootElement addChild:node];

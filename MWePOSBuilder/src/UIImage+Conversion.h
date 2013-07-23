@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  *
- * Modified into a UIImage category by Matt Gillingham (2013)
+ * Modified into a UIImage category by MediWeb, Inc. (2013)
  */
 
 #import <UIKit/UIKit.h>
