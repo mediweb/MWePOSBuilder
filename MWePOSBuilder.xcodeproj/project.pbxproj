@@ -17,7 +17,6 @@
 		F444D2B2179E53240062222B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F444D29F179E53240062222B /* InfoPlist.strings */; };
 		F444D2B3179E53240062222B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F444D2A1179E53240062222B /* main.m */; };
 		F444D2B4179E53240062222B /* MWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F444D2A3179E53240062222B /* MWAppDelegate.m */; };
-		F444D2B5179E53240062222B /* MWePOSBuilder-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F444D2A4179E53240062222B /* MWePOSBuilder-Info.plist */; };
 		F444D2B8179E53240062222B /* MWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F444D2AC179E53240062222B /* MWViewController.m */; };
 		F444D2C2179E54660062222B /* MWePOSBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = F444D2BC179E54660062222B /* MWePOSBuilder.m */; };
 		F444D2C3179E54660062222B /* MWePOSPrint.m in Sources */ = {isa = PBXBuildFile; fileRef = F444D2BE179E54660062222B /* MWePOSPrint.m */; };
@@ -186,7 +185,6 @@
 				F444D2B0179E53240062222B /* Default.png in Resources */,
 				F444D2B1179E53240062222B /* Default@2x.png in Resources */,
 				F444D2B2179E53240062222B /* InfoPlist.strings in Resources */,
-				F444D2B5179E53240062222B /* MWePOSBuilder-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

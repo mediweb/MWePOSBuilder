@@ -27,7 +27,7 @@
 
   self.ipAddressField = [[UITextField alloc] initWithFrame:CGRectMake(
     self.view.bounds.size.width / 2.0f - 70.0f,
-    self.view.bounds.size.height / 2.0f - 49.0f,
+    self.view.bounds.size.height / 2.0f - 149.0f,
     140.0f,
     30.0f
   )];
@@ -40,7 +40,7 @@
   [printButton addTarget:self action:@selector(printButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
   printButton.frame = CGRectMake(
     self.view.bounds.size.width / 2.0f - 60.0f,
-    self.view.bounds.size.height / 2.0f + 5.0f,
+    self.view.bounds.size.height / 2.0f - 95.0f,
     120.0f,
     44.0f
   );
